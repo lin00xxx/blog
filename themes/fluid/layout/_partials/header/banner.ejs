@@ -1,0 +1,30 @@
+<%
+// 仅首页（home，含分页）渲染封面；其他页面不输出任何封面 DOM
+if (is_home()) {
+  var subtitle = page.subtitle || page.title
+  var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_img_height)
+%>
+<!-- 首页封面：一层均匀深灰蒙版（与内容卡片同色系），最底部小段渐隐避免硬边 -->
+<div id="banner" class="banner"
+     style="background: linear-gradient(180deg, rgba(31, 36, 47, 0.35) 0%, rgba(31, 36, 47, 0.35) 82%, rgba(31, 36, 47, 0) 100%);">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0);">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          <% if(theme.fun_features.typing.enable && in_scope(theme.fun_features.typing.scope)) { %>
+            <span id="subtitle" data-typed-text="<%= subtitle %>"></span>
+          <% } else { %>
+            <span id="subtitle"><%- subtitle %></span>
+          <% } %>
+        </div>
+      </div>
+
+      <% if (theme.scroll_down_arrow.enable && theme.scroll_down_arrow.banner_height_limit <= banner_img_height) { %>
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+<% } %>

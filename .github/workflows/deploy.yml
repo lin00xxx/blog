@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate static files
+        run: npx hexo g
+
+      - name: Deploy to lin00xxx.github.io
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
+          publish_dir: ./public
+          external_repository: lin00xxx/lin00xxx.github.io
+          publish_branch: main
+          user_name: lin00xxx
+          user_email: lin00xxx@users.noreply.github.com

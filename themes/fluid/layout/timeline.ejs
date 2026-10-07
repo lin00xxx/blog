@@ -1,0 +1,42 @@
+<%
+// 取出所有"动态"分类的文章，按时间倒序
+var timelinePosts = site.posts.filter(function(p) {
+  var hit = false;
+  p.categories.each(function(cat) {
+    if (cat.name === '动态') hit = true;
+  });
+  return hit;
+}).sort('-date');
+%>
+
+<div class="timeline-page">
+  <h1 class="timeline-page-title">动态</h1>
+
+  <% if (timelinePosts.length === 0) { %>
+    <p class="timeline-empty">还没有动态，去 <code>source/_posts/record/</code> 下写第一篇吧。</p>
+  <% } %>
+
+  <div class="timeline">
+    <% timelinePosts.each(function(post) { %>
+      <div class="timeline-item">
+        <!-- 右侧时间轴：圆点 + 竖线 + 时间 -->
+        <div class="timeline-axis">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">
+            <span class="timeline-date"><%= date(post.date, 'MM-DD') %></span>
+            <span class="timeline-year"><%= date(post.date, 'YYYY') %></span>
+          </div>
+        </div>
+
+        <!-- 左侧动态卡片 -->
+        <div class="timeline-card">
+          <div class="timeline-card-inner">
+            <div class="timeline-content markdown-body">
+              <%- post.content %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>

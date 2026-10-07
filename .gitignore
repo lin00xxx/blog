@@ -1,0 +1,15 @@
+# 依赖
+node_modules/
+
+# Hexo 生成产物（可重新生成，不进仓库）
+public/
+.deploy_git/
+db.json
+
+# 日志与系统文件
+*.log
+.DS_Store
+Thumbs.db
+
+# 备份文件
+*.bak

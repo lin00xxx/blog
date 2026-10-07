@@ -1,0 +1,9 @@
+<%
+var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_img_height)
+// 首页保留 banner 高度（vh）；其他页面不输出封面，只保留约 70px 让出 fixed 导航栏
+%>
+
+<div class="header-inner" style="height: <%= is_home() ? banner_img_height + 'vh' : '70px' %>;">
+  <%- partial('_partials/header/navigation') %>
+  <%- partial('_partials/header/banner') %>
+</div>
