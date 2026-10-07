@@ -22,7 +22,7 @@ jobs:
         run: npm ci
 
       - name: Generate static files
-        run: npx hexo g
+        run: node gen.js
 
       - name: Deploy to lin00xxx.github.io
         uses: peaceiris/actions-gh-pages@v3
