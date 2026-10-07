@@ -208,20 +208,25 @@ h1, h2, h3, h4, h5, h6,
   margin-bottom: 28px;
 }
 
-/* 右侧时间轴（固定窄列） */
+/* 左侧时间轴（固定窄列，可点击） */
 .timeline-axis {
   width: 70px;
   flex-shrink: 0;
   position: relative;
   padding-top: 14px;
+  cursor: pointer;
+  user-select: none;
 }
-/* 贯穿竖线 */
+.timeline-axis:hover .timeline-date {
+  color: #fff;
+}
+/* 贯穿竖线（时间轴右边） */
 .timeline::before {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 90px; /* 卡片宽度 + gap 的位置对齐竖线 */
+  left: 80px;
   width: 2px;
   background: rgba(255, 255, 255, 0.15);
 }
@@ -233,14 +238,12 @@ h1, h2, h3, h4, h5, h6,
   border: 3px solid rgba(31, 36, 47, 0.98);
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
   position: relative;
-  left: -32px; /* 让圆点落在竖线上 */
+  left: -6px;
   margin-bottom: 8px;
 }
 .timeline-time {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding-right: 8px;
 }
 .timeline-date {
   font-size: 15px;
@@ -251,11 +254,21 @@ h1, h2, h3, h4, h5, h6,
   font-size: 12px;
   color: rgba(242, 244, 247, 0.5);
 }
+.timeline-hint {
+  font-size: 11px;
+  color: rgba(242, 244, 247, 0.35);
+  margin-top: 6px;
+}
 
-/* 左侧动态卡片 */
+/* 右侧动态卡片（默认收起） */
 .timeline-card {
   flex: 1;
   min-width: 0;
+  display: none;
+  padding-top: 14px;
+}
+.timeline-item:not(.collapsed) .timeline-card {
+  display: block;
 }
 .timeline-card-inner {
   background: rgba(255, 255, 255, 0.05);

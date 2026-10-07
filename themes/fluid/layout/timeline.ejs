@@ -1,5 +1,4 @@
 <%
-// 取出所有"动态"分类的文章，按时间倒序
 var timelinePosts = site.posts.filter(function(p) {
   var hit = false;
   p.categories.each(function(cat) {
@@ -17,18 +16,19 @@ var timelinePosts = site.posts.filter(function(p) {
   <% } %>
 
   <div class="timeline">
-    <% timelinePosts.each(function(post) { %>
-      <div class="timeline-item">
-        <!-- 右侧时间轴：圆点 + 竖线 + 时间 -->
-        <div class="timeline-axis">
+    <% timelinePosts.each(function(post, index) { %>
+      <div class="timeline-item <%= index === 0 ? '' : 'collapsed' %>">
+        <!-- 左侧时间轴：点击展开/收起 -->
+        <div class="timeline-axis timeline-toggle">
           <div class="timeline-dot"></div>
           <div class="timeline-time">
             <span class="timeline-date"><%= date(post.date, 'MM-DD') %></span>
             <span class="timeline-year"><%= date(post.date, 'YYYY') %></span>
+            <span class="timeline-hint"><%= index === 0 ? '收起' : '展开' %></span>
           </div>
         </div>
 
-        <!-- 左侧动态卡片 -->
+        <!-- 右侧动态卡片（默认收起，展开后显示） -->
         <div class="timeline-card">
           <div class="timeline-card-inner">
             <div class="timeline-content markdown-body">
@@ -40,3 +40,15 @@ var timelinePosts = site.posts.filter(function(p) {
     <% }) %>
   </div>
 </div>
+
+<script>
+document.querySelectorAll('.timeline-toggle').forEach(function(el) {
+  el.addEventListener('click', function() {
+    var item = el.closest('.timeline-item');
+    var isOpen = !item.classList.contains('collapsed');
+    item.classList.toggle('collapsed');
+    var hint = el.querySelector('.timeline-hint');
+    if (hint) hint.textContent = isOpen ? '展开' : '收起';
+  });
+});
+</script>
