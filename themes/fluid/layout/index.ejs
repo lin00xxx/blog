@@ -1,11 +1,6 @@
-<%
-if (theme.index.slogan.enable) {
-  page.subtitle = theme.index.slogan.text || config.subtitle || ''
-}
-page.banner_img = theme.index.banner_img
-page.banner_img_height = theme.index.banner_img_height
-page.banner_mask_alpha = theme.index.banner_mask_alpha
-%>
+<% if (theme.index.slogan.enable) { page.subtitle=theme.index.slogan.text || config.subtitle || '' }
+  page.banner_img=theme.index.banner_img; page.banner_img_height=theme.index.banner_img_height
+  page.banner_mask_alpha=theme.index.banner_mask_alpha %>
 
   <h1 style="display: none">
     <%= config.title %>
@@ -24,8 +19,8 @@ page.banner_mask_alpha = theme.index.banner_mask_alpha
           <%= page.subtitle || config.subtitle %>
         </h1>
         <p class="home-desc">
-          这里是我的小站，记录学习、生活和一些奇思妙想。<br>
-          慢慢写，慢慢更，欢迎随便逛逛。
+          这里是我的小站，记录学习、生活。<br>
+          欢迎随便逛逛。
         </p>
         <div class="home-tags">
           <span class="home-tag">记录</span>
@@ -65,7 +60,7 @@ page.banner_mask_alpha = theme.index.banner_mask_alpha
       <a class="nav-card" href="<%= url_for('/categories/学习/') %>">
         <div class="nav-card-body">
           <h3>学习</h3>
-          <p>一些笔记或者瞎搞的项目</p>
+          <p>一些笔记或者学习记录</p>
         </div>
         <div class="nav-card-arrow">&rarr;</div>
       </a>
