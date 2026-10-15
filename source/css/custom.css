@@ -313,3 +313,104 @@ h1, h2, h3, h4, h5, h6,
   .timeline-year { display: none; }
   .timeline-item { gap: 10px; }
 }
+
+/* ============ 学习页面 ============ */
+.study-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+.study-page-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 30px;
+}
+.study-empty {
+  color: rgba(242, 244, 247, 0.5);
+}
+
+.study-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 每个文件夹条 */
+.study-group {
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background 0.2s ease;
+}
+.study-group:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.study-group-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  cursor: pointer;
+  user-select: none;
+}
+.study-group-icon i {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.study-group-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+}
+.study-group-count {
+  font-size: 13px;
+  color: rgba(242, 244, 247, 0.4);
+  margin-left: auto;
+}
+.study-group-arrow i {
+  font-size: 14px;
+  color: rgba(242, 244, 247, 0.4);
+  transition: transform 0.3s ease;
+}
+.study-group.collapsed .study-group-arrow i {
+  transform: rotate(180deg);
+}
+
+/* 展开后的文章列表 */
+.study-group-list {
+  display: none;
+  padding: 0 22px 16px;
+}
+.study-group:not(.collapsed) .study-group-list {
+  display: block;
+}
+.study-post-item {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+  transition: padding-left 0.2s ease;
+}
+.study-post-item:last-child {
+  border-bottom: none;
+}
+.study-post-item:hover {
+  padding-left: 6px;
+}
+.study-post-item:hover .study-post-title {
+  color: #fff;
+}
+.study-post-date {
+  font-size: 13px;
+  color: rgba(242, 244, 247, 0.4);
+  flex-shrink: 0;
+  width: 44px;
+}
+.study-post-title {
+  font-size: 15px;
+  color: rgba(242, 244, 247, 0.8);
+}

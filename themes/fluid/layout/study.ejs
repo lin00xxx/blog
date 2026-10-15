@@ -1,0 +1,70 @@
+<%
+// 取出主分类是"学习"的所有文章，按二级分类分组
+var studyPosts = site.posts.filter(function(p) {
+  var hit = false;
+  p.categories.each(function(cat) {
+    if (cat.name === '学习') hit = true;
+  });
+  return hit;
+});
+
+// 按二级分类分组
+var groups = {};
+studyPosts.each(function(post) {
+  var subCat = '其他';
+  post.categories.each(function(cat) {
+    if (cat.name !== '学习') subCat = cat.name;
+  });
+  if (!groups[subCat]) groups[subCat] = [];
+  groups[subCat].push(post);
+});
+
+// 排序：每个组内按时间倒序
+Object.keys(groups).forEach(function(key) {
+  groups[key].sort(function(a, b) { return b.date - a.date; });
+});
+%>
+
+<div class="study-page">
+  <h1 class="study-page-title">学习</h1>
+
+  <% if (studyPosts.length === 0) { %>
+    <p class="study-empty">还没有笔记，去 <code>source/_posts/notes/</code> 下写第一篇吧。</p>
+  <% } %>
+
+  <div class="study-groups">
+    <% Object.keys(groups).forEach(function(catName, idx) { %>
+      <div class="study-group <%= idx === 0 ? '' : 'collapsed' %>">
+        <!-- 可点击的文件夹条 -->
+        <div class="study-group-header">
+          <div class="study-group-icon">
+            <i class="iconfont icon-folder-fill"></i>
+          </div>
+          <div class="study-group-name"><%= catName %></div>
+          <div class="study-group-count"><%= groups[catName].length %> 篇</div>
+          <div class="study-group-arrow">
+            <i class="iconfont icon-arrowup"></i>
+          </div>
+        </div>
+
+        <!-- 展开后的文章列表 -->
+        <div class="study-group-list">
+          <% groups[catName].forEach(function(post) { %>
+            <a class="study-post-item" href="<%= url_for(post.path) %>">
+              <span class="study-post-date"><%= date(post.date, 'MM-DD') %></span>
+              <span class="study-post-title"><%= post.title %></span>
+            </a>
+          <% }) %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.study-group-header').forEach(function(el) {
+  el.addEventListener('click', function() {
+    el.parentElement.classList.toggle('collapsed');
+  });
+});
+</script>
