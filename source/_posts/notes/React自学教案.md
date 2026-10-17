@@ -1,7 +1,7 @@
 ---
 title: React知识
 date: 2026-10-17 17:00
-categories: 学习
+categories: [学习, 前端]
 tags: [前端]
 ---
 
