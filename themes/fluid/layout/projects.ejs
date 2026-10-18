@@ -1,0 +1,33 @@
+<%
+// 项目列表：在这里加项目就行
+var projects = [
+  {
+    name: '单词默写网页',
+    desc: '本地背单词工具。灵感源自我自己的背单词习惯，支持默写，配有艾宾浩斯记忆法',
+    link: 'https://lin00xxx.github.io/word-study/',
+    tags: ['前端', '工具']
+  }
+];
+%>
+
+<div class="projects-page">
+  <h1 class="projects-page-title">项目</h1>
+  <p class="projects-page-sub">一些做过的小东西，点卡片可以跳转。</p>
+
+  <div class="projects-grid">
+    <% projects.forEach(function(p) { %>
+      <a class="project-card" href="<%= p.link %>" target="_blank">
+        <div class="project-card-body">
+          <h3 class="project-name"><%= p.name %></h3>
+          <p class="project-desc"><%= p.desc %></p>
+          <div class="project-tags">
+            <% p.tags.forEach(function(t) { %>
+              <span class="project-tag"><%= t %></span>
+            <% }) %>
+          </div>
+        </div>
+        <div class="project-card-arrow">&rarr;</div>
+      </a>
+    <% }) %>
+  </div>
+</div>
